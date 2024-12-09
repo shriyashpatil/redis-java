@@ -22,9 +22,10 @@ public class Main {
           clientSocket = serverSocket.accept();
 
           // Ping response to the client.
-          OutputStream outputStream = clientSocket.getOutputStream();
-          outputStream.write("+PONG\r\n".getBytes());
-
+          while(true) {
+              OutputStream outputStream = clientSocket.getOutputStream();
+              outputStream.write("+PONG\r\n".getBytes());
+          }
         } catch (IOException e) {
           System.out.println("IOException: " + e.getMessage());
         } finally {
