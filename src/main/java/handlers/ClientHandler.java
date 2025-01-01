@@ -28,7 +28,7 @@ public class ClientHandler implements  Runnable{
                 else if (input.equalsIgnoreCase("ECHO")){
                     String echo = br.readLine();
                     echo = br.readLine();
-                    outputStream.write(echo.getBytes());
+                    outputStream.write( String.format("$%d\r\n%s\r\n",echo.length(), echo).getBytes());
                     outputStream.flush();
                 }
             }
