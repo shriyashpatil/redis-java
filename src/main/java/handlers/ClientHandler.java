@@ -25,9 +25,10 @@ public class ClientHandler implements  Runnable{
                     outputStream.write("+PONG\r\n".getBytes());
                     outputStream.flush();
                 }
-                else if (input.contains("ECHO")){
-                    String [] commands = input.split(" ");
-                    outputStream.write(commands[1].getBytes());
+                else if (input.equalsIgnoreCase("ECHO")){
+                    String echo = br.readLine();
+                    echo = br.readLine();
+                    outputStream.write(echo.getBytes());
                     outputStream.flush();
                 }
             }
