@@ -1,3 +1,5 @@
+import handlers.ClientHandler;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,21 +22,13 @@ public class Main {
           // Since the tester restarts your program quite often, setting SO_REUSEADDR
           // ensures that we don't run into 'Address already in use' errors
           serverSocket.setReuseAddress(true);
-
           // Wait for connection from client.
-          clientSocket = serverSocket.accept();
+          // multiple client
+           while(true) {
+               clientSocket = serverSocket.accept();
+               new Thread(new ClientHandler(clientSocket)).start();
+           }
 
-
-          OutputStream outputStream = clientSocket.getOutputStream();
-          BufferedReader br  = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));
-          String input;
-          while(true) {
-             input = br.readLine();
-             if(input.trim().equalsIgnoreCase("PING")) {
-                 outputStream.write("+PONG\r\n".getBytes());
-                 outputStream.flush();
-             }
-          }
         } catch (IOException e) {
           System.out.println("IOException: " + e.getMessage());
         } finally {
