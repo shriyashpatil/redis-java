@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -22,10 +24,16 @@ public class Main {
           // Wait for connection from client.
           clientSocket = serverSocket.accept();
 
-          // Ping response to the client.
+
+          OutputStream outputStream = clientSocket.getOutputStream();
+          BufferedReader br  = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));
+          String input;
           while(true) {
-              OutputStream outputStream = clientSocket.getOutputStream();
-              outputStream.write("+PONG\r\n".getBytes());
+             input = br.readLine();
+             if(input.trim().equalsIgnoreCase("PING")) {
+                 outputStream.write("+PONG\r\n".getBytes());
+                 outputStream.flush();
+             }
           }
         } catch (IOException e) {
           System.out.println("IOException: " + e.getMessage());
