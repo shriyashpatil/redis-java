@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class ClientHandler implements  Runnable{
     private final Socket clientSocket;
+
+    private HashMap<String ,String> cache = new HashMap<>();
 
     public ClientHandler(Socket clientSocket){
         this.clientSocket = clientSocket;
@@ -29,6 +32,22 @@ public class ClientHandler implements  Runnable{
                     String echo = br.readLine();
                     echo = br.readLine();
                     outputStream.write( String.format("$%d\r\n%s\r\n",echo.length(), echo).getBytes());
+                    outputStream.flush();
+                }
+                else if (input.equalsIgnoreCase("SET")){
+                    String key = br.readLine();
+                    key = br.readLine();
+                    String value = br.readLine();
+                    value = br.readLine();
+                    cache.put(key,value);
+                    outputStream.write( String.format("$%d\r\n%s\r\n","OK".length(), "OK").getBytes());
+                    outputStream.flush();
+                }
+                else if(input.equalsIgnoreCase("GET")){
+                    String key = br.readLine();
+                    key = br.readLine();
+                    String value = cache.get(key);
+                    outputStream.write( String.format("$%d\r\n%s\r\n",value.length(),value).getBytes());
                     outputStream.flush();
                 }
             }
