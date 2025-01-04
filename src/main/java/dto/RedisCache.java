@@ -24,6 +24,7 @@ public class RedisCache {
     }
 
     public void setValue(String key,String value,Integer ttl){
+         System.out.println("ttl");
          cache.put(key,value);
          expiryCache.put(key,System.currentTimeMillis()+ttl*1000L);
     }
