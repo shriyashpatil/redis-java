@@ -15,7 +15,7 @@ public class GetCommand implements Command{
     public String execute(String input, BufferedReader br) {
         String key = getKey(br);
         String value = cache.getValue(key);
-        return String.format("$%d\r\n%s\r\n",value.length(),value);
+        return value;
     }
 
     private String getKey(BufferedReader br){

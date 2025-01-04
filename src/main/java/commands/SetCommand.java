@@ -13,7 +13,11 @@ public class SetCommand implements Command{
     public String execute(String input, BufferedReader br) {
             String key =getKey(br);
             String value = getValue(br);
-            cache.setValue(key,value);
+            if(checkExpiry(br)){
+                cache.setValue(key,value,getTtl(br));
+            }else {
+                cache.setValue(key, value);
+            }
             return String.format("$%d\r\n%s\r\n","OK".length(), "OK");
     }
 
@@ -27,8 +31,24 @@ public class SetCommand implements Command{
     }
 
     private boolean checkExpiry(BufferedReader br){
-
+        try {
+            br.readLine();
+            String px = br.readLine();
+            if(px.equalsIgnoreCase("PX")) return true;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return false;
+    }
+
+    private  Integer getTtl(BufferedReader br){
+        try {
+            br.readLine();
+            String ttl = br.readLine();
+            return Integer.valueOf(ttl);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String getValue(BufferedReader br){
