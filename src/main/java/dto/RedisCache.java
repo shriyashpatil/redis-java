@@ -22,7 +22,7 @@ public class RedisCache {
         hm.put(key,value);
     }
 
-    public void setValue(String key,String value,Integer expTime){
+    public void setValue(String key,String value,Integer ttl){
 
     }
 
