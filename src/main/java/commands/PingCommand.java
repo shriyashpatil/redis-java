@@ -9,7 +9,7 @@ public class PingCommand implements Command{
 
     @Override
     public String execute(String input, BufferedReader br) {
-        return PING_RESPONSE;
+        return "+PONG\r\n";
     }
 
     @Override
