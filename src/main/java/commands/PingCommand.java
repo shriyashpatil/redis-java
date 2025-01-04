@@ -5,7 +5,7 @@ import java.io.BufferedReader;
 public class PingCommand implements Command{
 
     private final String PING_COOMAND = "PING";
-    private final String PING_RESPONSE = "+PONG\\r\\n";
+    private final String PING_RESPONSE = "+PONG\r\n";
 
     @Override
     public String execute(String input, BufferedReader br) {
