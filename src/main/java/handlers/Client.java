@@ -27,8 +27,9 @@ public class Client implements Runnable{
             CommandExecutor commandExecutor = new CommandExecutor();
             String input;
             input = br.readLine();
+            System.out.println("INPUT : "+input);
             String res = commandExecutor.execute(input,br);
-            System.out.println(res);
+            System.out.println("OUTPUT : "+res);
             outputStream.write(res.getBytes());
             outputStream.flush();
         }catch(IOException io){

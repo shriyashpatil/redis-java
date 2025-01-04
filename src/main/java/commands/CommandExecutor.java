@@ -7,7 +7,7 @@ import java.util.List;
 public class CommandExecutor {
 
     private final String DEFAULT = "+PONG\r\n";
-    private final List<Command> commands = new ArrayList<>();
+    private List<Command> commands = new ArrayList<>();
 
     public CommandExecutor() {
         addCommand(new PingCommand());
@@ -22,6 +22,7 @@ public class CommandExecutor {
 
     public String execute(String input, BufferedReader br){
         for(Command command : commands){
+            System.out.println(command.getClass());
             if(command.mathces(input)){
                return  command.execute(input,br);
             }
