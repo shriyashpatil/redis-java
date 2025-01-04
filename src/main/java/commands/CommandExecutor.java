@@ -6,11 +6,14 @@ import java.util.List;
 
 public class CommandExecutor {
 
-    private final String DEFAULT = "+PONG\\r\\n";
+    private final String DEFAULT = "+PONG\r\n";
     private final List<Command> commands = new ArrayList<>();
 
     public CommandExecutor() {
-
+        addCommand(new PingCommand());
+        addCommand(new EchoCommand());
+        addCommand(new SetCommand());
+        addCommand(new GetCommand());
     }
 
     public void addCommand(Command command){commands.add(command);}
