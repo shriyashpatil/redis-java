@@ -29,6 +29,7 @@ public class Client implements Runnable{
             while (true) {
                 input = br.readLine();
                 String res = commandExecutor.execute(input,br);
+                System.out.println(res);
                 outputStream.write(res.getBytes());
                 outputStream.flush();
             }
