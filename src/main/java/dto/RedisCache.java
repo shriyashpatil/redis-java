@@ -23,17 +23,13 @@ public class RedisCache {
         cache.put(key,value);
     }
 
-    public void setValue(String key,String value,Integer ttl){
+    public void setValue(String key,String value,Long ttl){
          cache.put(key,value);
-         System.out.println("Setting time "+System.currentTimeMillis()+ttl);
          expiryCache.put(key,System.currentTimeMillis()+ttl);
     }
 
 
     public String getValue(String key){
-
-        System.out.println("Getting time : "+System.currentTimeMillis());
-        System.out.println("expiry time "+expiryCache.get(key));
 
         if(expiryCache.containsKey(key) && System.currentTimeMillis()>expiryCache.get(key)){
             cache.remove(key);

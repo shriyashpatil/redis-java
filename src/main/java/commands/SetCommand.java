@@ -15,8 +15,7 @@ public class SetCommand implements Command{
             String key = tokens.get(1);
             String value = tokens.get(2);
             if(checkExpiry(tokens)){
-                System.out.println("ttl set----------");
-                cache.setValue(key,value,getTtl(tokens.get(4)));
+                cache.setValue(key,value,getTtl(tokens.get(3),tokens.get(4)));
             }else {
                 cache.setValue(key, value);
             }
@@ -26,12 +25,17 @@ public class SetCommand implements Command{
 
     private boolean checkExpiry(List<String> tokens){
             if(tokens.size()<=3) return false;
-            String px = tokens.get(3);
-            return px.equalsIgnoreCase("PX");
+            String ttl = tokens.get(3);
+            return ttl.equalsIgnoreCase("PX") || ttl.equalsIgnoreCase("EX") ;
     }
 
-    private  Integer getTtl(String ttl){
-            return Integer.valueOf(ttl);
+    private  Long getTtl(String command,String value){
+
+            if(command.equalsIgnoreCase("PX")) return Long.valueOf(value);
+
+            else if(command.equalsIgnoreCase("EX")) return Long.parseLong(value)*1000L;
+
+            return Long.MAX_VALUE;
     }
 
     private String getValue(BufferedReader br){
