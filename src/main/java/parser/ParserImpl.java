@@ -10,6 +10,7 @@ public class ParserImpl implements Parser{
     @Override
     public List<String> parse(BufferedReader br)  {
             try {
+                System.out.println("Parsing the input");
                 List<String> tokens = new ArrayList<>();
                 String input = br.readLine();
                 while (input!=null){

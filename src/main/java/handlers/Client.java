@@ -25,7 +25,6 @@ public class Client implements Runnable{
     @Override
     public void run() {
         try {
-
             OutputStream outputStream = clientSocket.getOutputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             Parser parser = new ParserImpl();
