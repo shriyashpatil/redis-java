@@ -32,6 +32,7 @@ public class ParserImpl implements Parser{
                     default:
                         System.out.println("Unknown type: " + type);
                 }
+                System.out.println("After Input: " + input);
             }
         } catch (IOException e) {
             System.err.println("Error while parsing: " + e.getMessage());
