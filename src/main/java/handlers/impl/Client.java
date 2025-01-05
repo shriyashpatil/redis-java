@@ -1,4 +1,4 @@
-package handlers;
+package handlers.impl;
 
 import commands.CommandExecutor;
 import parser.Parser;

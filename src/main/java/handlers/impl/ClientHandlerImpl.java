@@ -1,14 +1,10 @@
 package handlers.impl;
 
-import commands.CommandExecutor;
-import handlers.Client;
 import handlers.ClientHandler;
 import handlers.ServerHandler;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

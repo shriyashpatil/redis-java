@@ -1,4 +1,4 @@
-package dto;
+package cache;
 
 import java.util.concurrent.ConcurrentHashMap;
 public class RedisCache {
