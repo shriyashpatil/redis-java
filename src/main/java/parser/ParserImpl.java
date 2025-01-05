@@ -23,7 +23,7 @@ public class ParserImpl implements Parser{
                         tokens.addAll(parseArray(br, input));
                         break;
                     case '$':
-                        tokens.add(parseSingleLine(br));
+                        tokens.add(parseSingleLine(br,input));
                         break;
                     case '+':
                     case '-':
@@ -48,24 +48,24 @@ public class ParserImpl implements Parser{
 
         for (int i = 0; i < arrayLength; i++) {
             // Skip current line and read the next line
-            br.readLine();
-            String line = br.readLine();
-            if (line != null) {
-                System.out.println("Array element: " + line);
-                arrayTokens.add(line);
+            input = br.readLine();
+            input = br.readLine();
+            if (input != null) {
+                System.out.println("Array element: " + input);
+                arrayTokens.add(input);
             }
         }
 
         return arrayTokens;
     }
 
-    private String parseSingleLine(BufferedReader br) throws IOException {
-        br.readLine(); // Skip current line
-        String nextLine = br.readLine();
-        if (nextLine != null) {
-            System.out.println("Single line token: " + nextLine);
+    private String parseSingleLine(BufferedReader br,String input) throws IOException {
+        input = br.readLine(); // Skip current line
+        input = br.readLine();
+        if (input != null) {
+            System.out.println("Single line token: " + input);
         }
-        return nextLine;
+        return input;
     }
 
 
