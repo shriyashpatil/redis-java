@@ -27,13 +27,15 @@ public class Client implements Runnable{
         try {
             OutputStream outputStream = clientSocket.getOutputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            Parser parser = new ParserImpl();
-            List<String> tokens = parser.parse(br);
-            CommandExecutor commandExecutor = new CommandExecutor();
-            String res = commandExecutor.execute(tokens);
-            System.out.println("OUTPUT : "+res);
-            outputStream.write(res.getBytes());
-            outputStream.flush();
+            while(true) {
+                Parser parser = new ParserImpl();
+                List<String> tokens = parser.parse(br);
+                CommandExecutor commandExecutor = new CommandExecutor();
+                String res = commandExecutor.execute(tokens);
+                System.out.println("OUTPUT : " + res);
+                outputStream.write(res.getBytes());
+                outputStream.flush();
+            }
         }catch(IOException io){
             io.printStackTrace();
         }finally {
