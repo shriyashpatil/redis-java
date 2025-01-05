@@ -23,7 +23,7 @@ public class SetCommand implements Command{
             return String.format("$%d\r\n%s\r\n","OK".length(), "OK");
     }
 
-    
+
     private boolean checkExpiry(List<String> tokens){
             if(tokens.size()<=3) return false;
             String px = tokens.get(3);
