@@ -13,8 +13,9 @@ public class ParserImpl implements Parser{
                 System.out.println("Parsing the input");
                 List<String> tokens = new ArrayList<>();
                 String input = br.readLine();
+                System.out.println(input);
                 while (input!=null){
-
+                    System.out.println(input);
                     if(input.charAt(0)=='*'){
                         int arrayLength = Character.getNumericValue(input.charAt(1));
                         for(int itr=0; itr<arrayLength; itr++){
