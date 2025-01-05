@@ -25,13 +25,16 @@ public class Client implements Runnable{
             OutputStream outputStream = clientSocket.getOutputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             CommandExecutor commandExecutor = new CommandExecutor();
-            String input;
-            input = br.readLine();
-            System.out.println("INPUT : "+input);
-            String res = commandExecutor.execute(input,br);
-            System.out.println("OUTPUT : "+res);
-            outputStream.write(res.getBytes());
-            outputStream.flush();
+            String input = br.readLine();
+            while(input!=null){
+                System.out.println("INPUT : "+input);
+                input = br.readLine();
+            }
+
+            //String res = commandExecutor.execute(input,br);
+            //System.out.println("OUTPUT : "+res);
+            //outputStream.write(res.getBytes());
+            //outputStream.flush();
         }catch(IOException io){
             io.printStackTrace();
         }finally {
