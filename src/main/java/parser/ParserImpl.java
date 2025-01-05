@@ -21,6 +21,7 @@ public class ParserImpl implements Parser{
                         for(int itr=0; itr<arrayLength; itr++){
                             br.readLine();
                             input = br.readLine();
+                            System.out.println(input);
                             tokens.add(input);
                         }
                         input = br.readLine();
