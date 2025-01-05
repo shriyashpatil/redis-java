@@ -15,6 +15,7 @@ public class SetCommand implements Command{
             String key = tokens.get(1);
             String value = tokens.get(2);
             if(checkExpiry(tokens)){
+                System.out.println("ttl set----------");
                 cache.setValue(key,value,getTtl(tokens.get(4)));
             }else {
                 cache.setValue(key, value);
@@ -22,15 +23,7 @@ public class SetCommand implements Command{
             return String.format("$%d\r\n%s\r\n","OK".length(), "OK");
     }
 
-    private String getKey(BufferedReader br){
-        try {
-            br.readLine();
-            return br.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    
     private boolean checkExpiry(List<String> tokens){
             if(tokens.size()<=3) return false;
             String px = tokens.get(3);
