@@ -35,6 +35,7 @@ public class ParserImpl implements Parser{
                         tokens.add(input.substring(1));
                     }
                     input = br.readLine();
+                    System.out.println("input---------"+input);
                 }
                 return tokens;
             }catch(IOException e){
