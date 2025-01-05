@@ -24,7 +24,6 @@ public class ParserImpl implements Parser{
                             System.out.println(input);
                             tokens.add(input);
                         }
-                        input = br.readLine();
                     }
                     else if(input.charAt(0)=='$'){
                         br.readLine();
