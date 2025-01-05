@@ -20,11 +20,11 @@ public class CommandExecutor {
 
     public void removeCommand(Command command){commands.remove(command);}
 
-    public String execute(String input, BufferedReader br){
+    public String execute(List<String> tokens){
         for(Command command : commands){
             System.out.println(command.getClass());
-            if(command.mathces(input)){
-               return  command.execute(input,br);
+            if(command.mathces(tokens.get(0))){
+               return  command.execute(tokens);
             }
         }
         return DEFAULT;

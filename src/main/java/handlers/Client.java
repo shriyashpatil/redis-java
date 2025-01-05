@@ -1,12 +1,15 @@
 package handlers;
 
 import commands.CommandExecutor;
+import parser.Parser;
+import parser.ParserImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.List;
 
 
 public class Client implements Runnable{
@@ -22,19 +25,16 @@ public class Client implements Runnable{
     @Override
     public void run() {
         try {
+
             OutputStream outputStream = clientSocket.getOutputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            Parser parser = new ParserImpl();
+            List<String> tokens = parser.parse(br);
             CommandExecutor commandExecutor = new CommandExecutor();
-            String input = br.readLine();
-            while(input!=null){
-                System.out.println("INPUT : "+input);
-                input = br.readLine();
-            }
-
-            //String res = commandExecutor.execute(input,br);
-            //System.out.println("OUTPUT : "+res);
-            //outputStream.write(res.getBytes());
-            //outputStream.flush();
+            String res = commandExecutor.execute(tokens);
+            System.out.println("OUTPUT : "+res);
+            outputStream.write(res.getBytes());
+            outputStream.flush();
         }catch(IOException io){
             io.printStackTrace();
         }finally {

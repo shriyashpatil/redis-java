@@ -4,6 +4,7 @@ import dto.RedisCache;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 public class GetCommand implements Command{
 
@@ -12,20 +13,9 @@ public class GetCommand implements Command{
     RedisCache cache = RedisCache.getInstance();
 
     @Override
-    public String execute(String input, BufferedReader br) {
-        String key = getKey(br);
-        String value = cache.getValue(key);
-        return value;
-    }
-
-    private String getKey(BufferedReader br){
-        try {
-            br.readLine();
-            return br.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+    public String execute(List<String> tokens) {
+        String key = tokens.get(1);
+        return cache.getValue(key);
     }
 
     @Override

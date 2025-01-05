@@ -4,17 +4,18 @@ import dto.RedisCache;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 public class SetCommand implements Command{
 
     private final String SET_COMMAND = "SET";
     RedisCache cache = RedisCache.getInstance();;
     @Override
-    public String execute(String input, BufferedReader br) {
-            String key =getKey(br);
-            String value = getValue(br);
-            if(checkExpiry(br)){
-                cache.setValue(key,value,getTtl(br));
+    public String execute(List<String> tokens) {
+            String key = tokens.get(1);
+            String value = tokens.get(2);
+            if(checkExpiry(tokens)){
+                cache.setValue(key,value,getTtl(tokens.get(4)));
             }else {
                 cache.setValue(key, value);
             }
@@ -30,25 +31,14 @@ public class SetCommand implements Command{
         }
     }
 
-    private boolean checkExpiry(BufferedReader br){
-        try {
-            br.readLine();
-            String px = br.readLine();
-            if(px.equalsIgnoreCase("PX")) return true;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
+    private boolean checkExpiry(List<String> tokens){
+            if(tokens.size()<=3) return false;
+            String px = tokens.get(3);
+            return px.equalsIgnoreCase("PX");
     }
 
-    private  Integer getTtl(BufferedReader br){
-        try {
-            br.readLine();
-            String ttl = br.readLine();
+    private  Integer getTtl(String ttl){
             return Integer.valueOf(ttl);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private String getValue(BufferedReader br){

@@ -2,23 +2,16 @@ package commands;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 public class EchoCommand implements Command{
 
     private final String ECHO_COMMAND = "ECHO";
 
     @Override
-    public String execute(String input, BufferedReader br) {
-
-        try {
-            String echo = br.readLine();
-            echo = br.readLine();
-            return String.format("$%d\r\n%s\r\n",echo.length(), echo);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
+    public String execute(List<String> tokens) {
+        String echo = tokens.get(1);
+        return String.format("$%d\r\n%s\r\n",echo.length(), echo);
     }
 
     @Override

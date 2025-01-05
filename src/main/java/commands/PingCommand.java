@@ -1,6 +1,7 @@
 package commands;
 
 import java.io.BufferedReader;
+import java.util.List;
 
 public class PingCommand implements Command{
 
@@ -8,7 +9,7 @@ public class PingCommand implements Command{
     private final String PING_RESPONSE = "+PONG\r\n";
 
     @Override
-    public String execute(String input, BufferedReader br) {
+    public String execute(List<String> tokens) {
         return "+PONG\r\n";
     }
 
