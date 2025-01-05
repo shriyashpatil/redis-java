@@ -13,15 +13,19 @@ public class ParserImpl implements Parser{
                 List<String> tokens = new ArrayList<>();
                 String input = br.readLine();
                 while (input!=null){
+
                     if(input.charAt(0)=='*'){
                         int arrayLength = Character.getNumericValue(input.charAt(1));
                         for(int itr=0; itr<arrayLength; itr++){
                             br.readLine();
-                            tokens.add(br.readLine());
+                            input = br.readLine();
+                            tokens.add(input);
                         }
+                        input = br.readLine();
                     }
                     else if(input.charAt(0)=='$'){
                         br.readLine();
+                        input = br.readLine();
                         tokens.add(br.readLine());
                     }
                     else if(input.charAt(0)=='+'){
@@ -30,6 +34,7 @@ public class ParserImpl implements Parser{
                     else if(input.charAt(0)=='-'){
                         tokens.add(input.substring(1));
                     }
+                    input = br.readLine();
                 }
                 return tokens;
             }catch(IOException e){
