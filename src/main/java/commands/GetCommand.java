@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GetCommand implements Command{
 
-    private final String GET_COMMAND = "GET_COMMAND";
+    private final String GET_COMMAND = "GET";
 
     RedisCache cache = RedisCache.getInstance();
 
