@@ -21,14 +21,15 @@ public class ParserImpl implements Parser{
                 switch (type) {
                     case '*':
                         tokens.addAll(parseArray(br, input));
-                        break;
+                        return tokens;
+
                     case '$':
                         tokens.add(parseSingleLine(br,input));
-                        break;
+                        return tokens;
                     case '+':
                     case '-':
                         tokens.add(input.substring(1));
-                        break;
+                        return tokens;
                     default:
                         System.out.println("Unknown type: " + type);
                 }
