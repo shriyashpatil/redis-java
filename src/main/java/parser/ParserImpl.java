@@ -29,7 +29,7 @@ public class ParserImpl implements Parser{
                     else if(input.charAt(0)=='$'){
                         br.readLine();
                         input = br.readLine();
-                        tokens.add(br.readLine());
+                        tokens.add(input);
                     }
                     else if(input.charAt(0)=='+'){
                         tokens.add(input.substring(1));
@@ -42,7 +42,7 @@ public class ParserImpl implements Parser{
                 }
                 return tokens;
             }catch(IOException e){
-
+                System.out.println(e.getMessage());
             }
 
         return new ArrayList<>();
